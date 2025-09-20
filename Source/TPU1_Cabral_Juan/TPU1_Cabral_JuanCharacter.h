@@ -73,6 +73,16 @@ protected:
 	/** Mouse Look Input Action */
 	UPROPERTY(EditAnywhere, Category="Input")
 	UInputAction* MouseLookAction;
+	
+	//Punto 2 agregar 3 acciones, voy a agregar un dash, correr y mostrar un mensaje
+	UPROPERTY(EditAnywhere, Category = "Input")
+	UInputAction* DashAction;
+	
+	UPROPERTY(EditAnywhere, Category = "Input")
+	UInputAction* RunAction;
+
+	UPROPERTY(EditAnywhere, Category = "Input")
+	UInputAction* MostrarMensajeAction;
 
 public:
 
@@ -94,10 +104,17 @@ protected:
 	//procesa el valor de rotacion para realizar la acción
 	/** Called for looking input */
 	void Look(const FInputActionValue& Value);
+	
+	//para la funcion correr la dividí en un inicio y final para cuando sse deje de presionar la tecla shift
+	void StartCorrer();
+	void Endcorrer();
+
+	void dashing();
+	void MostrarMensaje();
 
 public:
 
-	//Registra valores de entrada para movimiento del personaje.
+	//Registra valores de entrada para movimiento del personaje en una ui interface para contol tactil en moviles.
 	/** Handles move inputs from either controls or UI interfaces */
 	UFUNCTION(BlueprintCallable, Category="Input")
 	virtual void DoMove(float Right, float Forward);
@@ -117,6 +134,7 @@ public:
 	UFUNCTION(BlueprintCallable, Category="Input")
 	virtual void DoJumpEnd();
 
+	
 public:
 
 	//el FORCEINLINE le dice al compilador que expanda la función directamente en lugar de hacer una llamada, es decir que inserta el código de la función
